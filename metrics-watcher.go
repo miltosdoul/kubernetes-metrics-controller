@@ -22,9 +22,15 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
+
 		config = c
 	} else {
-		panic("Environment variable KUBECONFIG not set")
+		c, err := rest.InClusterConfig()
+		if err != nil {
+			panic(err)
+		}
+
+		config = c
 	}
 
 	clientSet := kubernetes.NewForConfigOrDie(config)
