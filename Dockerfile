@@ -18,6 +18,9 @@ COPY --from=builder /opt/controller /bin
 
 RUN mkdir /opt/kube
 
+# Default path, replace with actual value when running container
+ENV KUBECONFIG_PATH="$HOME/.kube/config"
+
 COPY config /opt/kube
 
 ENV KUBECONFIG="/opt/kube/config"
